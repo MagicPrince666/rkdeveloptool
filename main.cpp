@@ -71,39 +71,39 @@ void ProgressInfoProc(DWORD deviceLayer, ENUM_PROGRESS_PROMPT promptID, long lon
 	char szText[256];
 	switch (promptID) {
 	case TESTDEVICE_PROGRESS:
-		sprintf(szText, "Test Device total %lld, current %lld", totalValue, currentValue);
+		snprintf(szText, sizeof(szText) - 1, "Test Device total %lld, current %lld", totalValue, currentValue);
 		strInfoText = szText;
 		break;
 	case LOWERFORMAT_PROGRESS:
-		sprintf(szText, "Lowerformat Device total %lld, current %lld", totalValue, currentValue);
+		snprintf(szText, sizeof(szText) - 1, "Lowerformat Device total %lld, current %lld", totalValue, currentValue);
 		strInfoText = szText;
 		break;
 	case DOWNLOADIMAGE_PROGRESS:
-		sprintf(szText, "Download Image total %lldK, current %lldK", totalValue/1024, currentValue/1024);
+		snprintf(szText, sizeof(szText) - 1, "Download Image total %lldK, current %lldK", totalValue/1024, currentValue/1024);
 		strInfoText = szText;
 		break;
 	case CHECKIMAGE_PROGRESS:
-		sprintf(szText, "Check Image total %lldK, current %lldK", totalValue/1024, currentValue/1024);
+		snprintf(szText, sizeof(szText) - 1, "Check Image total %lldK, current %lldK", totalValue/1024, currentValue/1024);
 		strInfoText = szText;
 		break;
 	case TAGBADBLOCK_PROGRESS:
-		sprintf(szText, "Tag Bad Block total %lld, current %lld", totalValue, currentValue);
+		snprintf(szText, sizeof(szText) - 1, "Tag Bad Block total %lld, current %lld", totalValue, currentValue);
 		strInfoText = szText;
 		break;
 	case TESTBLOCK_PROGRESS:
-		sprintf(szText, "Test Block total %lld, current %lld", totalValue, currentValue);
+		snprintf(szText, sizeof(szText) - 1, "Test Block total %lld, current %lld", totalValue, currentValue);
 		strInfoText = szText;
 		break;
 	case ERASEFLASH_PROGRESS:
-		sprintf(szText, "Erase Flash total %lld, current %lld", totalValue, currentValue);
+		snprintf(szText, sizeof(szText) - 1, "Erase Flash total %lld, current %lld", totalValue, currentValue);
 		strInfoText = szText;
 		break;
 	case ERASESYSTEM_PROGRESS:
-		sprintf(szText, "Erase System partition total %lld, current %lld", totalValue, currentValue);
+		snprintf(szText, sizeof(szText) - 1, "Erase System partition total %lld, current %lld", totalValue, currentValue);
 		strInfoText = szText;
 		break;
 	case ERASEUSERDATA_PROGRESS:
-		sprintf(szText, "<LocationID=%x> Erase Userdata partition total %lld, current %lld", deviceLayer, totalValue, currentValue);
+		snprintf(szText, sizeof(szText) - 1, "<LocationID=%x> Erase Userdata partition total %lld, current %lld", deviceLayer, totalValue, currentValue);
 		strInfoText = szText;
 		break;
 	}
@@ -3303,7 +3303,7 @@ int main(int argc, char* argv[])
 	struct stat statBuf;
 
 	g_ConfigItemVec.clear();
-	sprintf(szProgramProcPath, "/proc/%d/exe", getpid());
+	snprintf(szProgramProcPath, sizeof(szProgramProcPath) - 1, "/proc/%d/exe", getpid());
 	if (readlink(szProgramProcPath, szProgramDir, 256) == -1)
 		strcpy(szProgramDir, ".");
 	else {

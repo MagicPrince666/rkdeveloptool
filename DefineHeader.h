@@ -11,7 +11,11 @@
 #include <wchar.h>
 #include <errno.h>
 #include <pthread.h>
+#ifdef __APPLE__
+#include <libusb-1.0/libusb.h>
+#else
 #include <libusb.h>
+#endif
 
 #include "Property.hpp"
 #include <list>
