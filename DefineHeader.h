@@ -12,7 +12,7 @@
 #include <errno.h>
 #include <pthread.h>
 #ifdef __APPLE__
-#include <libusb-1.0/libusb.h>
+#include <libusb.h>
 #else
 #include <libusb.h>
 #endif

@@ -3,6 +3,7 @@ rkdeveloptool gives you a simple way to read/write rockusb device.let's start.
 compile and install
 1 install libusb and libudev
 	sudo apt-get install libudev-dev libusb-1.0-0-dev dh-autoreconf
+	brew install automake
 2 go into root of rkdeveloptool
 3.aclocal
 4.autoreconf -i
@@ -34,3 +35,8 @@ mmc list
 mmc dev 1  //切换到 SD 卡，0 为 SD 卡，1 为 eMMC
 
 mmc info
+
+load mmc 1:1 0x01f00000 rockchip/rk3308-rock-pi-s.dtb
+load mmc 1:1 0x00280000 kernel.img
+
+booti 0x00280000 - 0x01f00000
