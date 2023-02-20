@@ -33,4 +33,47 @@ gzip -d openwrt-rockchip-armv8-radxa_rock-pi-s-squashfs-sysupgrade.img.gz
 mmc list
 mmc dev 1  //切换到 SD 卡，0 为 SD 卡，1 为 eMMC
 
+
+CONFIG_RFKILL_FULL=y
+CONFIG_BT=y
+CONFIG_BT_HCIUART=y
+CONFIG_BT_BREDR=y
+CONFIG_BT_RFCOMM=y
+CONFIG_BT_HS=y
+CONFIG_BT_LE=y
+
 mmc info
+
+part uuid mmc 1:2 uuid
+setenv bootargs "console=ttyS0,1500000 earlycon=uart8250,mmio32,0xff0a0000 root=PARTUUID=5452574f-02 rw rootwait"
+load mmc 1:1 0x01f00000 rockchip/rk3308-rock-pi-s.dtb
+load mmc 1:1 0x00280000 kernel.img
+booti 0x00280000 - 0x01f00000
+
+固件下载
+```
+./rkdeveloptool db rockdev/rk3308_loader_v2.05.132.bin
+./rkdeveloptool wl 0 rockdev/parameter.txt
+./rkdeveloptool wl 0x2000 rockdev/uboot.img
+./rkdeveloptool wl 0x3000 rockdev/trust.img
+./rkdeveloptool wl 0x4000 rockdev/misc.img
+./rkdeveloptool wl 0xA800 rockdev/boot.img
+./rkdeveloptool wl 0xF000 rockdev/rootfs.img
+./rkdeveloptool wl 0x25000 rockdev/oem.img
+./rkdeveloptool wl 0x3D000 rockdev/userdata.img
+./rkdeveloptool rd
+```
+
+原版固件下载
+```
+./rkdeveloptool db ~/cbox/rockdev/rk3308_loader_v2.05.132.bin
+./rkdeveloptool wl 0 ~/cbox/rockdev/parameter-64bit-emmc.txt
+./rkdeveloptool wl 0x2000 ~/cbox/rockdev/uboot.img
+./rkdeveloptool wl 0x3000 ~/cbox/rockdev/trust.img
+./rkdeveloptool wl 0x4000 ~/cbox/rockdev/misc.img
+./rkdeveloptool wl 0xA800 ~/cbox/rockdev/boot.img
+./rkdeveloptool wl 0xF000 ~/cbox/rockdev/rootfs.img
+./rkdeveloptool wl 0x25000 ~/cbox/rockdev/oem.img
+./rkdeveloptool wl 0x3D000 ~/cbox/rockdev/userdata.img
+./rkdeveloptool rd
+```
