@@ -13,3 +13,4 @@ rkdeveloptool*bz2
 log
 *.bin
 *.img
+build/
