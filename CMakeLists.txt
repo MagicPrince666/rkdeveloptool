@@ -23,7 +23,7 @@ set (libusb_LIBRARY ${LIBUSB_LIBRARY_DIRS})
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set (libusb_LIBRARY ${LIBUSB_LIBRARY_DIRS}/libusb-1.0.dylib)
 else()
-    set (libusb_LIBRARY ${LIBUSB_LIBRARY_DIRS}/libusb-1.0.so)
+    set (libusb_LIBRARY "usb-1.0")
 endif()
 
 # Turn off build log
